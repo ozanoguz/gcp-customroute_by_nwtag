@@ -23,17 +23,17 @@ Last option above cannot be configured using GCP GUI as of today (Q2'22). Config
 
 ## Design & Topology
 The following diagram illustrates environment for this use-case. As shown in the topology, an Internal Load Balancer (ILB) is placed behind FortiGate HA cluster. ILB's internal fronting IP address will be used as a next-hop-IP-address setting in custom-route configuration pointing out to Internet. 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/GCP%20Architectures%20v2-Custom_Route.jpg>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/GCP%20Architectures%20v2-Custom_Route.jpg>
 ## Configuration Steps
 
 ### Step 1. Access Google Cloud Shell
 GCP management console page can be used to access CLI by clicking "Activage Cloud Shell" button on top right.
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_activate_cloud_shell.png width="200"/>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_activate_cloud_shell.png width="200"/>
 
 After your Cloud Shell machine provisioned, a black screen will be visible at the bottom.
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_cloud_shell.png width="400"/>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_cloud_shell.png width="400"/>
 
 ### Step 2. Create custom-route with network-tag
 After accessing cloud shell over CLI, following syntax can be used to create custom route table with network tag specified.  Same _network_tag_value_ will be used by compute resources in Spoke VPC.  
@@ -49,11 +49,11 @@ gcloud compute routes create custom_route_name \
 ### Step 3. Edit Virtual Machine Network Tag
 Navigate to specific VM which needs egress inspection by FortiGate under _"Compute Engine > VM Instances > select specific VM"_ 
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_navigate_vm.png width="300"/>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_navigate_vm.png width="300"/>
 
 You can add network tag value on "_Edit_" screen for a virtual machine. Find "_Network Tags_" section on edit screen as below.
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_edit_vm_network_tag.png width="400"/> 
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_edit_vm_network_tag.png width="400"/> 
 
 Add _network_tag_value_ defined in custom route table. When you click "_Save_" at the bottom, custom route table will become effective and outgoing traffic will be routed to ILB IP address as it is defined in custom route.
 
@@ -65,24 +65,24 @@ Here is the nagivation path for creating those:
 Objects:       Under "Policy & Objects > Addresses"
 Security Rule: Under "Policy & Objects > Firewall Policy"
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_FortiGate_security_rule.png width="800"/> 
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_FortiGate_security_rule.png width="800"/> 
 
 ### Step 5. Validation
 
 In this demo environment, Linux based VM is installed within Spoke VPC. Serial console for this VM can be accessed through GCP console GUI via this path "Compute Engine > VM Instances > Spoke-VM > Connect to Serial Console"
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_access_vm_via_console.png width="400"/>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_access_vm_via_console.png width="400"/>
 
 To find out egress-NAT'ed public IP address, _curl ip.me_ can be used. Output will show Public IP address which is used by Cloud NAT deployed via FortiGate deployment template. That means, outgoing packets are traversing through FortiGate instances.
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_pip_cloud_nat.png width="300"/>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_GCP_pip_cloud_nat.png width="300"/>
 
 
 ### Step 6. FortiGate Traffic Log
 
 Traffic log for the test above can be accessed through FortiGate management GUI screen via "Log & Export > Forward Traffic"
 
-<img src=https://github.com/iemcloudteam/gcp-customroute_by_nwtag/blob/main/images/SS_FortiGate_traffic_log.png width="800"/>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_FortiGate_traffic_log.png width="800"/>
 
 ## Additional Resources
 
