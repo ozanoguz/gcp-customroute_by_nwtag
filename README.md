@@ -23,7 +23,7 @@ Last option above cannot be configured using GCP GUI as of today (Q2'22). Config
 
 ## Design & Topology
 The following diagram illustrates environment for this use-case. As shown in the topology, an Internal Load Balancer (ILB) is placed behind FortiGate HA cluster. ILB's internal fronting IP address will be used as a next-hop-IP-address setting in custom-route configuration pointing out to Internet. 
-<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/GCP%20Architectures%20v2-Custom_Route.jpg>
+<img src=https://github.com/ozanoguz/gcp-customroute_by_nwtag/blob/main/images/SS_Custom_Route.jpg>
 ## Configuration Steps
 
 ### Step 1. Access Google Cloud Shell
